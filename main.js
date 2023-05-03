@@ -1,50 +1,24 @@
-/* Ejercicio #7 Taller 2 Javascript 
-Programa que pida el ingreso del nombre y precio de un artículo y la
-cantidad que lleva el cliente. Mostrar lo que debe pagar el comprador
-en su factura.*/
+/* Ejercicio #8 Taller 2 Javascript 
+Programa que Ingrese por teclado:
+a. el valor del lado de un cuadrado para mostrar por pantalla el
+perímetro del mismo
+b. la base y la altura de un rectángulo para mostrar el área del
+mismo*/
 
+let opcion = prompt("Seleccione una opción:\n 1. Cuadrado\n 2. Rectángulo");
 
-let productos = [];
-let respuesta;
+if (opcion === "1") {
+  let lado = parseFloat(prompt("Ingrese el valor del lado del cuadrado:"));
+  let perimetro = 4 * lado;
+  alert(`El perímetro del cuadrado es ${perimetro}.`);
 
-do {
-  let nombreProd = prompt("Ingrese el nombre del producto.");
-  let precio = parseFloat(prompt(`Ingrese el precio de ${nombreProd}.`));
-  let cantidad = parseInt(prompt(`Ingrese la cantidad de ${nombreProd} que va a llevar.`));
-  
-  let total = precio * cantidad;
-  
-  let producto = {
-    nombre: nombreProd,
-    precio: precio,
-    cantidad: cantidad,
-    total: total
-  }
-  
-  productos.push(producto);
+} else if (opcion === "2") {
+  let base = parseFloat(prompt("Ingrese el valor de la base del rectángulo:"));
+  let altura = parseFloat(prompt("Ingrese el valor de la altura del rectángulo:"));
+  let area = base * altura;
+  alert(`El área del rectángulo es ${area}.`);
 
-  respuesta = prompt("¿Desea ingresar otro producto? (s/n)").toUpperCase(); 
+} else {
+  alert("Sigue las instrucciones estupido 🙄");
 
-  
-} while (respuesta === "S");
-
-  let totalPagar = 0;
-  
-  for (let i = 0; i < productos.length; i++) {
-    totalPagar += productos[i].total;
-  };
-  
-  let factura = productos.map(
-    (producto) => `${producto.nombre}: $${producto.cantidad} x $${producto.precio} = $${producto.total}`
-  );
-  
-  factura.push(`Total a pagar: $${totalPagar}`);
-
-
-alert(`Factura:
-${factura.join("\n")}
-`);
-
-/* si el precio de un producto es 4.5, al utilizar toFixed(2) se obtendrá la cadena "4.50", que es la representación del número con dos decimales. */
-/* La función map() se utiliza para crear un nuevo array con los detalles de cada producto en el formato deseado */
-/* la función join("\n") se utiliza para unir los elementos del array con un salto de línea entre ellos. */
+}
