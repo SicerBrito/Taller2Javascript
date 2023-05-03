@@ -1,52 +1,50 @@
-/* Ejercicio #6 Taller 2 Javascript 
-Construir el algoritmo en Javascript para un programa
-para cualquier cantidad de estudiantes, que lea el nombre,
-el sexo y la nota definitiva y halle al estudiante con la mayor
-nota y al estudiante con la menor nota y cuantos eran
-hombres y cuantos mujeres.*/
+/* Ejercicio #7 Taller 2 Javascript 
+Programa que pida el ingreso del nombre y precio de un artículo y la
+cantidad que lleva el cliente. Mostrar lo que debe pagar el comprador
+en su factura.*/
 
 
-let estudiantes = [];
+let productos = [];
+let respuesta;
 
-let cantidadEstudiantes = prompt("Ingrese la cantidad de estudiantes que va a registrar:");
+do {
+  let nombreProd = prompt("Ingrese el nombre del producto.");
+  let precio = parseFloat(prompt(`Ingrese el precio de ${nombreProd}.`));
+  let cantidad = parseInt(prompt(`Ingrese la cantidad de ${nombreProd} que va a llevar.`));
+  
+  let total = precio * cantidad;
+  
+  let producto = {
+    nombre: nombreProd,
+    precio: precio,
+    cantidad: cantidad,
+    total: total
+  }
+  
+  productos.push(producto);
 
-for(let i = 0; i < cantidadEstudiantes; i++) {
-  let nombre = prompt(`Ingrese el nombre del estudiante a registrar. (${i+1}):`);
-  let sexo = prompt(`Ingrese el sexo del estudiante ${nombre}. (${i+1}) (M o F):`);
-  let notaDefinitiva = parseFloat(prompt(`Ingrese la nota definitiva del estudiante ${nombre}. (${i+1}):`));
+  respuesta = prompt("¿Desea ingresar otro producto? (s/n)").toUpperCase(); 
 
-  let estudiante = {
-    nombre: nombre,
-    sexo: sexo,
-    notaDefinitiva: notaDefinitiva,
+  
+} while (respuesta === "S");
+
+  let totalPagar = 0;
+  
+  for (let i = 0; i < productos.length; i++) {
+    totalPagar += productos[i].total;
   };
-  estudiantes.push(estudiante);
-}
+  
+  let factura = productos.map(
+    (producto) => `${producto.nombre}: $${producto.cantidad} x $${producto.precio} = $${producto.total}`
+  );
+  
+  factura.push(`Total a pagar: $${totalPagar}`);
 
-let estudianteMayorNota = estudiantes[0];
-for(let i = 1; i < estudiantes.length; i++) {
-  if(estudiantes[i].notaDefinitiva > estudianteMayorNota.notaDefinitiva) {
-    estudianteMayorNota = estudiantes[i];
-  }
-}
 
-let estudianteMenorNota = estudiantes[0];
-for(let i = 1; i < estudiantes.length; i++) {
-  if(estudiantes[i].notaDefinitiva < estudianteMenorNota.notaDefinitiva) {
-    estudianteMenorNota = estudiantes[i];
-  }
-}
+alert(`Factura:
+${factura.join("\n")}
+`);
 
-let cantidadHombres = 0;
-let cantidadMujeres = 0;
-for(let i = 0; i < estudiantes.length; i++) {
-  if(estudiantes[i].sexo.toUpperCase() === "M") {
-    cantidadHombres++;
-  } else if(estudiantes[i].sexo.toUpperCase() === "F") {
-    cantidadMujeres++;
-  }
-}
-
-alert(`El estudiante con la mayor nota es ${estudianteMayorNota.nombre} con una nota de ${estudianteMayorNota.notaDefinitiva}`);
-alert(`El estudiante con la menor nota es ${estudianteMenorNota.nombre} con una nota de ${estudianteMenorNota.notaDefinitiva}`);
-alert(`Hay ${cantidadHombres} hombres y ${cantidadMujeres} mujeres en el grupo de estudiantes.`);
+/* si el precio de un producto es 4.5, al utilizar toFixed(2) se obtendrá la cadena "4.50", que es la representación del número con dos decimales. */
+/* La función map() se utiliza para crear un nuevo array con los detalles de cada producto en el formato deseado */
+/* la función join("\n") se utiliza para unir los elementos del array con un salto de línea entre ellos. */
