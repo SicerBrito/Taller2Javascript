@@ -1,31 +1,52 @@
-/* Ejercicio #5 Taller 2 Javascript 
-Construir el algoritmo que lea por teclado dos números,
-si el primero es mayor al segundo informar su suma y
-diferencia, en caso contrario, informar el producto y la
-división del primero respecto al segundo.*/
-
-let seguir = true;
-
-do {
-    let num1 = parseFloat(prompt("Ingrese un numero."));
-    let num2 = parseFloat(prompt("Ingrese otro numero."));
-
-    let suma = (num1 + num2);
-    let resta = (num1 - num2);
-    let divison = (num1 / num2);
-    let mult = (num1 * num2);
-    if (num1 > num2){
-        alert(`El numero mayor es ${num1}`)
-        alert(`La suma de ${num1} + ${num2} es ${suma}`)
-        alert(`La resta de ${num1} - ${num2} es ${resta}`)
-    } else if (num2 > num1) {
-        alert(`El numero mayor es ${num2}`);
-        alert(`La division de ${num1} / ${num2} es ${divison}`);
-        alert(`La multiplicacion de ${num1} * ${num2} es ${mult}`);
-    }
+/* Ejercicio #6 Taller 2 Javascript 
+Construir el algoritmo en Javascript para un programa
+para cualquier cantidad de estudiantes, que lea el nombre,
+el sexo y la nota definitiva y halle al estudiante con la mayor
+nota y al estudiante con la menor nota y cuantos eran
+hombres y cuantos mujeres.*/
 
 
-seguir = confirm("Desea ingresar mas datos?");
-    
-} while (seguir);
+let estudiantes = [];
 
+let cantidadEstudiantes = prompt("Ingrese la cantidad de estudiantes que va a registrar:");
+
+for(let i = 0; i < cantidadEstudiantes; i++) {
+  let nombre = prompt(`Ingrese el nombre del estudiante a registrar. (${i+1}):`);
+  let sexo = prompt(`Ingrese el sexo del estudiante ${nombre}. (${i+1}) (M o F):`);
+  let notaDefinitiva = parseFloat(prompt(`Ingrese la nota definitiva del estudiante ${nombre}. (${i+1}):`));
+
+  let estudiante = {
+    nombre: nombre,
+    sexo: sexo,
+    notaDefinitiva: notaDefinitiva,
+  };
+  estudiantes.push(estudiante);
+}
+
+let estudianteMayorNota = estudiantes[0];
+for(let i = 1; i < estudiantes.length; i++) {
+  if(estudiantes[i].notaDefinitiva > estudianteMayorNota.notaDefinitiva) {
+    estudianteMayorNota = estudiantes[i];
+  }
+}
+
+let estudianteMenorNota = estudiantes[0];
+for(let i = 1; i < estudiantes.length; i++) {
+  if(estudiantes[i].notaDefinitiva < estudianteMenorNota.notaDefinitiva) {
+    estudianteMenorNota = estudiantes[i];
+  }
+}
+
+let cantidadHombres = 0;
+let cantidadMujeres = 0;
+for(let i = 0; i < estudiantes.length; i++) {
+  if(estudiantes[i].sexo.toUpperCase() === "M") {
+    cantidadHombres++;
+  } else if(estudiantes[i].sexo.toUpperCase() === "F") {
+    cantidadMujeres++;
+  }
+}
+
+alert(`El estudiante con la mayor nota es ${estudianteMayorNota.nombre} con una nota de ${estudianteMayorNota.notaDefinitiva}`);
+alert(`El estudiante con la menor nota es ${estudianteMenorNota.nombre} con una nota de ${estudianteMenorNota.notaDefinitiva}`);
+alert(`Hay ${cantidadHombres} hombres y ${cantidadMujeres} mujeres en el grupo de estudiantes.`);
