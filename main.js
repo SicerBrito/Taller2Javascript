@@ -1,31 +1,21 @@
-/* Ejercicio #2 Taller 2 Javascript 
-Dado un número indicar si es par o impar y si es mayor de 10.*/
+/* Ejercicio #3 Taller 2 Javascript 
+3. Construir el algoritmo para determinar el voltaje de un
+circuito a partir de la resistencia y la intensidad de corriente.*/
 
+/* E = I x R. */
 
 let seguir = true;
 
 do {
-  let numeroIngr = prompt("Ingrese un numero:");
-  let parImpar = (numeroIngr) % 2;
+    
+let intensidad = prompt("Ingrese la intencidad en amperios.");
+let resistencia = prompt("Ingrese la resistencia en ohmios.");
 
-  if (!isNaN(numeroIngr)) {
-    if (parImpar == 0) {
-      if (numeroIngr > 10) {
-        alert(`El numero ${numeroIngr} es par y Mayor a 10.`);
-      } else {
-        alert(`El numero ${numeroIngr} es par.`);
-      }
-    } else if (parImpar != 0) {
-      if (numeroIngr > 10) {
-        alert(`El numero ${numeroIngr} es impar y Mayor a 10.`);  
-      } else {
-        alert(`El numero ${numeroIngr} es impar.`);
-      }
-    }
-  } else {
-    alert("Por favor ingresa un número válido.");
-  }
+let voltaje = (intensidad * resistencia);
 
-  seguir = confirm("Desea ingresar mas datos?");
+alert(`El voltaje es ${voltaje} voltios`);
+
+
+seguir = confirm("Desea ingresar mas datos?");
 } while (seguir);
 
